@@ -9,26 +9,26 @@ namespace PDFCreate.Models
     {
         public string file_no { get; set; }
         public string Portfolio { get; set; }
-        public DateTime? Portfolio_Purchase_Date { get; set; }
-        public decimal? OriginalBalance { get; set; }
-        public decimal? Original_Principal { get; set; }
-        public decimal? Original_Interest { get; set; }
-        public decimal? Original_Costs { get; set; }
-        public decimal? Original_Fees { get; set; }
-        public decimal? Current_Principal { get; set; }
-        public decimal? Current_Interest { get; set; }
-        public decimal? Current_Costs { get; set; }
-        public decimal? Current_Fees { get; set; }
-        public decimal? CurrentBalance { get; set; }
-        public DateTime? AccountOpenDate { get; set; }
-        public DateTime? CHARGEOFF_DATE { get; set; }
-        public decimal? ChargeOff_Amount { get; set; }
-        public decimal? IssuerAccountNumber { get; set; }
+        public string Portfolio_Purchase_Date { get; set; }
+        public string OriginalBalance { get; set; }
+        public double? Original_Principal { get; set; }
+        public string Original_Interest { get; set; }
+        public string Original_Costs { get; set; }
+        public string Original_Fees { get; set; }
+        public string Current_Principal { get; set; }
+        public string Current_Interest { get; set; }
+        public string Current_Costs { get; set; }
+        public string Current_Fees { get; set; }
+        public string CurrentBalance { get; set; }
+        public string AccountOpenDate { get; set; }
+        public string CHARGEOFF_DATE { get; set; }
+        public string ChargeOff_Amount { get; set; }
+        public string IssuerAccountNumber { get; set; }
         public string Primary_SSN { get; set; }
-        public DateTime? IssuerLPDate { get; set; }
-        public decimal? IssuerLastPaidAmount { get; set; }
-        public DateTime? ServicerLastPayDate { get; set; }
-        public decimal? ServicerLastPayAmount { get; set; }
+        public string IssuerLPDate { get; set; }
+        public string IssuerLastPaidAmount { get; set; }
+        public string ServicerLastPayDate { get; set; }
+        public string ServicerLastPayAmount { get; set; }
         public string IssuerName { get; set; }
         public string Primary_Phone_Home {get;set;}
         public string Primary_ZipPostal { get; set; }

@@ -11,32 +11,32 @@ namespace PDFCreate.Models
         public string data_id { get; set; }
         public string purchase_description { get; set; }
         public DateTime? purchase_date { get; set; }
-        public int purchase_id { get; set; }
-        public decimal? data_bal_total_start { get; set; }
-        public decimal? data_bal_total { get; set; }
-        public decimal? data_bal_principal { get; set; }
-        public decimal? data_bal_interest { get; set; }
-        public decimal? data_bal_other { get; set; }
-        public decimal? data_bal_principal_start { get; set; }
-        public decimal? data_bal_interest_start { get; set; }
-        public decimal? data_bal_other_start { get; set; }
+        public string purchase_id { get; set; }
+        public double? data_bal_total_start { get; set; }
+        public double? data_bal_total { get; set; }
+        public double? data_bal_principal { get; set; }
+        public double? data_bal_interest { get; set; }
+        public double? data_bal_other { get; set; }
+        public double? data_bal_principal_start { get; set; }
+        public double? data_bal_interest_start { get; set; }
+        public double? data_bal_other_start { get; set; }
         public DateTime? acctopen { get; set; }
-        public decimal? intrate { get; set; }
+        public double? intrate { get; set; }
         public DateTime? chargeoff { get; set; }
-        public decimal? chargeoffamt { get; set; }
+        public double? chargeoffamt { get; set; }
         public string pri_acctno { get; set; }
         public string sec_acctno { get; set; }
         public DateTime? delinquency { get; set; }
         public DateTime? lastpayment { get; set; }
         public DateTime? lastpayment_ptc { get; set; }
-        public decimal? lastpaymentamt { get; set; }
-        public decimal? lastpaymentamt_ptc { get; set; }
+        public double? lastpaymentamt { get; set; }
+        public double? lastpaymentamt_ptc { get; set; }
         public string originator { get; set; }
         public string merchant { get; set; }
         public DateTime? STATUTE_DATE { get; set; }
         public string DEBT_TYPE { get; set; }
         public DateTime? legal_placement_date { get; set; }
-        public decimal? judgment_award { get; set; }
+        public double? judgment_award { get; set; }
         public string HOME_PHONE { get; set; }
         public string pri_zip { get; set; }
         public string pri_city { get; set; }
