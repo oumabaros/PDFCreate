@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PDFCreate.Models;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -45,6 +46,8 @@ namespace PDFCreate.Controllers
         [HttpPost]
         public async Task<IActionResult> ImportExcel(IFormFile postedFile)
         {
+            PdfModel pdfm = new PdfModel();
+
             if (postedFile != null)
             {
                 //Create a Folder.
@@ -124,20 +127,38 @@ namespace PDFCreate.Controllers
                 List<JDetails> jdt = CreateJDetails(JDetailsDT);
                 List<JKDetails> jkdt = CreateJKDetails(JKDetailsDT);
                 List<Payments> pmnts = CreatePayments(PaymentsDT);
-
                 
-
-                foreach(Payments jd in pmnts)
-                {
-                    if (jd.file_no != null)
-                    {
-                        System.Diagnostics.Debug.WriteLine("FILENO: " + jd.file_no);
-                        System.Diagnostics.Debug.WriteLine("Desc: " + jd.pay_Description);
-                    }
-                }
+                pdfm.jdt = jdt;
+                pdfm.jkdt = jkdt;
+                pdfm.pmnts = pmnts;
+                              
             }
+           
+            return CreatePdf(pdfm);
+        }
 
-            return Redirect("~/Home/Index");
+        public IActionResult CreatePdf(PdfModel pdfm)
+        {
+            string webRootPath = Environment.WebRootPath;
+            string contentRootPath = Environment.ContentRootPath;
+
+            var header = contentRootPath + "\n" + webRootPath + "static/Header.html#pagetext=Page&oftext=Of";
+            var footer = contentRootPath + "\n" + webRootPath + "static/Footer.html#pagetext=Page&oftext=Of";
+
+            string customSwitches = string.Format("--header-html  \"{0}\" " +
+                                   "--header-spacing \"0\" " +
+                                   "--footer-html \"{1}\" " +
+                                   "--footer-spacing \"10\" " +
+                                   "--footer-font-size \"10\" " +
+                                   "--header-font-size \"10\" ", header, footer);
+
+            return new ViewAsPdf("JDetailsReport", pdfm)
+            {
+                CustomSwitches = "--page-offset 0 --footer-center [page] --footer-font-size 8",
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Landscape,
+                PageMargins = { Top = 20, Bottom = 22 },
+
+            };
         }
 
         private List<Payments> CreatePayments(DataTable dt)

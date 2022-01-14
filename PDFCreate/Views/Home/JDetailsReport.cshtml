@@ -1,0 +1,38 @@
+﻿@model PDFCreate.Models.PdfModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "JDetails Report";
+}
+
+<div class="container">
+    <p /><p />
+    <h2>JDetails Report</h2>
+    @foreach (var item in Model.jdt)
+    {
+        if (item.file_no != null)
+        {
+<div style="page-break-after: always;">
+    <h2>AcctNumber: @item.file_no</h2>
+    <h2>Consumer: @item.pri_first @item.pri_middle @item.pri_last</h2>
+    <br />
+    <p>
+        This file is an accurate report created on @DateTime.Now.Date of the records held by Allgate Financial LLC and connected to
+        @item.file_no . This is a @item.originator @item.merchant account acquired by JH Portfolio Debt Equities and transferred to
+        pursuant to a voluntary surrender for the benefit of secured creditors on May 19, 2019.
+    </p>
+    <br />
+    <h1>DETAILS</h1>
+    <table class="table table-sm">
+        <tr>
+            <td>file no</td>
+            <td>@item.file_no</td>
+        </tr>
+
+    </table>
+</div>
+        }
+    }
+
+   
+</div>
