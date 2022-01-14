@@ -4,35 +4,453 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "JDetails Report";
 }
-
+<style>
+    .table th, .table td {
+        border-top: none !important;
+    }
+</style>
 <div class="container">
-    <p /><p />
-    <h2>JDetails Report</h2>
     @foreach (var item in Model.jdt)
     {
         if (item.file_no != null)
         {
-<div style="page-break-after: always;">
-    <h2>AcctNumber: @item.file_no</h2>
-    <h2>Consumer: @item.pri_first @item.pri_middle @item.pri_last</h2>
-    <br />
-    <p>
-        This file is an accurate report created on @DateTime.Now.Date of the records held by Allgate Financial LLC and connected to
-        @item.file_no . This is a @item.originator @item.merchant account acquired by JH Portfolio Debt Equities and transferred to
-        pursuant to a voluntary surrender for the benefit of secured creditors on May 19, 2019.
-    </p>
-    <br />
-    <h1>DETAILS</h1>
-    <table class="table table-sm">
-        <tr>
-            <td>file no</td>
-            <td>@item.file_no</td>
-        </tr>
+            <div style="page-break-after: always;">
+                <h2>AcctNumber: @item.file_no</h2>
+                <h2>Consumer: @item.pri_first @item.pri_middle @item.pri_last</h2>
+                <br />
+                <p>
+                    This file is an accurate report created on @DateTime.Now.ToString("dd/MM/yyyy") of the records held by Allgate Financial LLC and connected to
+                    @item.file_no . This is a @item.originator @item.merchant account acquired by JH Portfolio Debt Equities and transferred to [MISSING FIELD]
+                    pursuant to a voluntary surrender for the benefit of secured creditors on May 19, 2019.
+                </p>
+                <br />
+                <h1>DETAILS</h1>
+                <table class="table table-sm">
+                    <tr>
+                        <td>file no</td>
+                        <td>@item.file_no</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio_Purchase_Date</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>OriginalBalance</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Principal</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Interest</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Costs</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Fees</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Principal</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Interest</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Costs</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Fees</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>CurrentBalance</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>AccountOpenDate</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>CHARGEOFF DATE</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>ChargeOff_Amount</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerAccountNumber</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_SSN</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerLPDate</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerLastPaidAmount</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>ServicerLastPayDate</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>ServicerLastPayAmount</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerName</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Phone-Home</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_ZipPostal</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_City</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_State</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>owner code</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_FName</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Middle</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_LName</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Address1</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Address2</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Email</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>acct status</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                    <tr>
+                        <td>OWNER STATUS</td>
+                        <td>[MISSING FIELD]</td>
+                    </tr>
+                </table>
+                <br />
+                <h1>PAYMENT HISTORY</h1>
+                <br />
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>PAYMENT INDEX</th>
+                            <th>file_no</th>
+                            <th>payment_date</th>
+                            <th>agy_id</th>
+                            <th>payment_amount</th>
+                            <th>pay_Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var itm in Model.pmnts.Where(f => f.file_no == item.file_no).OrderBy(p => p.payment_date))
+                        {
+                            <tr>
+                                <td>@itm.payment_index</td>
+                                <td>@itm.file_no</td>
+                                <td>@itm.payment_date</td>
+                                <td>@itm.agy_Id</td>
+                                <td>@itm.payment_amount</td>
+                                <td>@itm.pay_Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <h1>NOTES</h1>
+                <br />
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>COMMENT INDEX</th>
+                            <th>file_no</th>
+                            <th>comment
+                            <th>
+                            <th>created</th>
+                            <th>createdby</th>
 
-    </table>
-</div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         }
     }
 
-   
 </div>
+<br />
+<div class="container">
+    @foreach (var item in Model.jkdt)
+    {
+        if (item.file_no != null)
+        {
+            <div style="page-break-after: always;">
+                <h2>AcctNumber: @item.file_no</h2>
+                <h2>Consumer: @item.Primary_FName @item.Primary_Middle @item.Primary_LName</h2>
+                <br />
+                <p>
+                    This file is an accurate report created on @DateTime.Now.ToString("dd/MM/yyyy") of the records held by Allgate Financial LLC and connected to
+                    @item.file_no . This is a [MISSING FIELD] [MISSING FIELD] account acquired by JH Portfolio Debt Equities and transferred to @item.owner_code
+                    pursuant to a voluntary surrender for the benefit of secured creditors on May 19, 2019.
+                </p>
+                <br />
+                <h1>DETAILS</h1>
+                <table class="table table-sm">
+                    <tr>
+                        <td>file no</td>
+                        <td>@item.file_no</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio</td>
+                        <td>@item.Portfolio</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio_Purchase_Date</td>
+                        <td>@item.Portfolio_Purchase_Date</td>
+                    </tr>
+                    <tr>
+                        <td>OriginalBalance</td>
+                        <td>@item.OriginalBalance</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Principal</td>
+                        <td>@item.Original_Principal</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Interest</td>
+                        <td>@item.Original_Interest</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Costs</td>
+                        <td>@item.Original_Costs</td>
+                    </tr>
+                    <tr>
+                        <td>Original_Fees</td>
+                        <td>@item.Original_Fees</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Principal</td>
+                        <td>@item.Current_Principal</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Interest</td>
+                        <td>@item.Current_Interest</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Costs</td>
+                        <td>@item.Current_Costs</td>
+                    </tr>
+                    <tr>
+                        <td>Current_Fees</td>
+                        <td>@item.Current_Fees</td>
+                    </tr>
+                    <tr>
+                        <td>CurrentBalance</td>
+                        <td>@item.CurrentBalance</td>
+                    </tr>
+                    <tr>
+                        <td>AccountOpenDate</td>
+                        <td>@item.AccountOpenDate</td>
+                    </tr>
+                    <tr>
+                        <td>CHARGEOFF DATE</td>
+                        <td>@item.CHARGEOFF_DATE</td>
+                    </tr>
+                    <tr>
+                        <td>ChargeOff_Amount</td>
+                        <td>@item.ChargeOff_Amount</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerAccountNumber</td>
+                        <td>@item.IssuerAccountNumber</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_SSN</td>
+                        <td>@item.Primary_SSN</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerLPDate</td>
+                        <td>@item.IssuerLPDate</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerLastPaidAmount</td>
+                        <td>@item.IssuerLastPaidAmount</td>
+                    </tr>
+                    <tr>
+                        <td>ServicerLastPayDate</td>
+                        <td>@item.ServicerLastPayDate</td>
+                    </tr>
+                    <tr>
+                        <td>ServicerLastPayAmount</td>
+                        <td>@item.ServicerLastPayAmount</td>
+                    </tr>
+                    <tr>
+                        <td>IssuerName</td>
+                        <td>@item.IssuerName</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Phone-Home</td>
+                        <td>@item.Primary_Phone_Home</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_ZipPostal</td>
+                        <td>@item.Primary_ZipPostal</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_City</td>
+                        <td>@item.Primary_City</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_State</td>
+                        <td>@item.Primary_State</td>
+                    </tr>
+                    <tr>
+                        <td>owner code</td>
+                        <td>@item.owner_code</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_FName</td>
+                        <td>@item.Primary_FName</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Middle</td>
+                        <td>@item.Primary_Middle</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_LName</td>
+                        <td>@item.Primary_LName</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Address1</td>
+                        <td>@item.Primary_Address1</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Address2</td>
+                        <td>@item.Primary_Address2</td>
+                    </tr>
+                    <tr>
+                        <td>Primary_Email</td>
+                        <td>@item.Primary_Email</td>
+                    </tr>
+                    <tr>
+                        <td>acct status</td>
+                        <td>@item.acct_status</td>
+                    </tr>
+                    <tr>
+                        <td>OWNER STATUS</td>
+                        <td>@item.OWNER_STATUS</td>
+                    </tr>
+                </table>
+                <br />
+                <h1>PAYMENT HISTORY</h1>
+                <br />
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>PAYMENT INDEX</th>
+                            <th>file_no</th>
+                            <th>payment_date</th>
+                            <th>agy_id</th>
+                            <th>payment_amount</th>
+                            <th>pay_Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var itm in Model.pmnts.Where(f => f.file_no == item.file_no).OrderBy(p => p.payment_date))
+                        {
+                            <tr>
+                                <td>@itm.payment_index</td>
+                                <td>@itm.file_no</td>
+                                <td>@itm.payment_date</td>
+                                <td>@itm.agy_Id</td>
+                                <td>@itm.payment_amount</td>
+                                <td>@itm.pay_Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <h1>NOTES</h1>
+                <br />
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>COMMENT INDEX</th>
+                            <th>file_no</th>
+                            <th>comment
+                            <th>
+                            <th>created</th>
+                            <th>createdby</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+                            <td>[MISSING FIELD]</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+
+
+</div>
+
