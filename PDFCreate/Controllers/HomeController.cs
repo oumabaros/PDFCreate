@@ -13,6 +13,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO.Compression;
+using GemBox.Pdf;
+using GemBox.Pdf.Content;
+using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace PDFCreate.Controllers
 {
@@ -20,7 +26,9 @@ namespace PDFCreate.Controllers
     {
         private readonly IWebHostEnvironment Environment;
         private readonly IConfiguration Configuration;
-
+        protected readonly ICompositeViewEngine _compositeViewEngine;
+        PdfModel pdfm = new PdfModel();
+       
         public HomeController(IWebHostEnvironment _environment, IConfiguration _configuration)
         {
             Environment = _environment;
@@ -42,11 +50,14 @@ namespace PDFCreate.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
         [HttpPost]
-        public async Task<IActionResult> ImportExcel(IFormFile postedFile)
+        public IActionResult ImportExcel(IFormFile postedFile)
         {
-            PdfModel pdfm = new PdfModel();
+            List<JDetails> jdt = new List<JDetails>();
+            List<JKDetails> jkdt = new List<JKDetails>();
+            List<Payments> pmnts = new List<Payments>();
+            string conString = "";
+            string filePath = "";
 
             if (postedFile != null)
             {
@@ -59,16 +70,17 @@ namespace PDFCreate.Controllers
 
                 //Save the uploaded Excel file.
                 string fileName = Path.GetFileName(postedFile.FileName);
-                string filePath = Path.Combine(path, fileName);
+                filePath = Path.Combine(path, fileName);
                 using (FileStream stream = new FileStream(filePath, FileMode.Create))
                 {
                     postedFile.CopyTo(stream);
                 }
-                string conString = this.Configuration.GetConnectionString("ExcelConString");
+                conString = this.Configuration.GetConnectionString("ExcelConString");
                 DataTable JDetailsDT = new DataTable();
                 DataTable JKDetailsDT = new DataTable();
                 DataTable PaymentsDT = new DataTable();
-
+                
+                
                 conString = string.Format(conString, filePath);
 
                 using (OleDbConnection connExcel = new OleDbConnection(conString))
@@ -103,7 +115,7 @@ namespace PDFCreate.Controllers
 
                             //Read Data from JDetailsSheet.
                             connExcel.Open();
-                            cmdExcel.CommandText = string.Format("SELECT * From [" + JDetailsSheet + "]"); 
+                            cmdExcel.CommandText = string.Format("SELECT * From [" + JDetailsSheet + "]");
                             odaExcel.SelectCommand = cmdExcel;
                             odaExcel.Fill(JDetailsDT);
                             connExcel.Close();
@@ -124,43 +136,61 @@ namespace PDFCreate.Controllers
                         }
                     }
                 }
-                List<JDetails> jdt = CreateJDetails(JDetailsDT);
-                List<JKDetails> jkdt = CreateJKDetails(JKDetailsDT);
-                List<Payments> pmnts = CreatePayments(PaymentsDT);
-                
+                jdt = CreateJDetails(JDetailsDT);
+                jkdt = CreateJKDetails(JKDetailsDT);
+                pmnts = CreatePayments(PaymentsDT);
+
                 pdfm.jdt = jdt;
                 pdfm.jkdt = jkdt;
                 pdfm.pmnts = pmnts;
-                              
+                                
             }
-           
-            return CreatePdf(pdfm);
-        }
 
+            return CreatePdf(pdfm);
+            //return PdfView(pdfm);
+        }
+        public IActionResult PdfView(PdfModel pdfm)
+        {
+            return View(pdfm);
+        }
         public IActionResult CreatePdf(PdfModel pdfm)
         {
-            string webRootPath = Environment.WebRootPath;
-            string contentRootPath = Environment.ContentRootPath;
-
-            var header = contentRootPath + "\n" + webRootPath + "static/Header.html#pagetext=Page&oftext=Of";
-            var footer = contentRootPath + "\n" + webRootPath + "static/Footer.html#pagetext=Page&oftext=Of";
-
-            string customSwitches = string.Format("--header-html  \"{0}\" " +
-                                   "--header-spacing \"0\" " +
-                                   "--footer-html \"{1}\" " +
-                                   "--footer-spacing \"10\" " +
-                                   "--footer-font-size \"10\" " +
-                                   "--header-font-size \"10\" ", header, footer);
-
-            return new ViewAsPdf("JDetailsReport", pdfm)
+            string root = Path.Combine(this.Environment.WebRootPath, "PDF");
+            if (!Directory.Exists(root))
             {
-                CustomSwitches = "--page-offset 0 --footer-center [page] --footer-font-size 8",
+                Directory.CreateDirectory(root);
+            }
+
+            var pdfname = "Document.pdf";
+            var path = Path.Combine(root, pdfname);
+            path = Path.GetFullPath(path);
+            
+            //string customSwitches = string.Format("--footer-right \" Page: [page]/[toPage]\"" +
+                                    //" --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\" "+
+                                    //"--header-html {0} --header-spacing -10", Url.Action("Header", "Home", null, "https")); 
+            string customSwitches = "--footer-right \" Page: [page]/[toPage]\"" +
+                                    " --footer-line --footer-font-size \"12\" --footer-spacing 1 --footer-font-name \"Segoe UI\" ";
+                                    
+            var cstmPdf = new ViewAsPdf("JDetailsReport", pdfm)
+            {
+                CustomSwitches = customSwitches,
                 PageOrientation = Rotativa.AspNetCore.Options.Orientation.Landscape,
                 PageMargins = { Top = 20, Bottom = 22 },
-
+                //FileName = pdfname,
+                SaveOnServerPath = path,
             };
+            return cstmPdf;
+        }
+        
+        [AllowAnonymous]
+        public ActionResult Header()
+        {
+            PdfModel pdfm_ = new PdfModel();
+            
+            return View(pdfm);
         }
 
+        
         private List<Payments> CreatePayments(DataTable dt)
         {
             List<Payments> pmnts = new List<Payments>();

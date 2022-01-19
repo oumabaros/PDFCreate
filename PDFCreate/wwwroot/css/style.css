@@ -1,0 +1,50 @@
+﻿
+.table th, .table td {
+    border-top: none !important;
+}
+@media print {
+    @page {
+        
+    }
+    .header-info {
+        text-align: left;
+    }
+
+    thead.report-header {
+        display: table-header-group;
+        padding-bottom: 50px;
+    }
+
+    tfoot.report-footer {
+        display: table-footer-group;
+        position: fixed;
+        top: 0;
+    }
+
+    table.report-container {
+        page-break-after: always;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+        padding-top: 300px;
+    }
+
+    td {
+        page-break-inside: avoid;
+        page-break-after: avoid
+    }
+
+    table.report-container div.article {
+        page-break-inside: avoid !important;
+    }
+
+    .table th, .table td {
+        border-top: none !important;
+    }
+
+    .report-header {
+    }
+}
+

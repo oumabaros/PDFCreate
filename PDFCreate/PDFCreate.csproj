@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetZip" Version="1.16.0" />
+    <PackageReference Include="GemBox.Pdf" Version="17.0.1087" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="21.2.0" />
+    <PackageReference Include="Syncfusion.Xamarin.Compression" Version="19.4.0.42" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
     <PackageReference Include="Rotativa.AspNetCore" Version="1.1.1" />
   </ItemGroup>

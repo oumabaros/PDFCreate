@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PDFCreate.Models;
 using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,28 @@ namespace PDFCreate
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+            .AddSessionStateTempDataProvider();
+
+            services.AddRazorPages()
+                    .AddSessionStateTempDataProvider();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true; // consent required
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+
+            });
+            services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(4);
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential if you wish
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +70,8 @@ namespace PDFCreate
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
